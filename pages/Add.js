@@ -7,12 +7,20 @@ import SearchBar from './components/SearchBar'
 import React, { useState, useEffect, useContext } from 'react'
 import { ViewPortContext } from './states/viewport_context'
 import { PanoramaContext } from './states/panorama_context'
+import { UserContext } from './states/user_context';
+import { useRouter } from 'next/router'
 
 
 function Add() {
   const [viewport, setViewport] = useState({});
   const [datas, setDatas] = useState({});
 
+  const router = useRouter();
+  const {user, setUser} = useContext(UserContext);
+  
+  useEffect(() => {
+    user==null?router.push('/auth/login'):null
+  }, [])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
