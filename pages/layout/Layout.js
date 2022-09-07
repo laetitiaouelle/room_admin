@@ -3,8 +3,11 @@ import {HiOutlineMenuAlt3} from 'react-icons/hi'
 import {BiImageAdd} from 'react-icons/bi'
 import {AiOutlineGlobal} from 'react-icons/ai'
 import { IconContext } from "react-icons"
+import { useRouter } from 'next/router'
+
 
 function Layout(props) {
+const router = useRouter();
   return (
     <div className='w-full bg-white h-screen flex flex-row justify-around fixed top-0 left-0 right-0 bottom-0 ' >
       <div className='w-52 h-screen bg-white border-r border-temp-[#fafafa]' >
@@ -65,7 +68,7 @@ function Layout(props) {
       </div>
       <div className='w-full h-screen ' >
         <div className='w-full h-16 bg-white  flex justify-end items-center px-3 ' >
-            <a className='cursor-pointer w-48' >
+            <a onClick={()=>router.push('/add')} className='cursor-pointer w-48' >
                 <div className='px-4 py-2 bg-temp-red flex flex-row justify-center w-48 border items-center rounded-full' >
                     <span className='text-white font-normal text-xs' >Add 360° image</span>
                     <span className='flex justify-center items-center '>
