@@ -31,13 +31,20 @@ a {
   }
 }
 
-Map{
-  width: 100%;
-  height: 100%;
-}
-.mapboxgl-control-container, mapboxgl-control-container *{
-  display: none !important;
-}
+
 .child{
   height: calc(100vh - 100px);
+}
+input, textarea, select{
+  color: black ;
+}
+label {
+  cursor: pointer;
+  /* Style as you please, it will become the visible UI component. */
+}
+
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
 }

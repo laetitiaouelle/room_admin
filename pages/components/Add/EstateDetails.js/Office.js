@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import AltitudeRegime from '../AltitudeRegime';
 
 function Office() {
 
@@ -10,7 +9,7 @@ function Office() {
   const [landarea, setLandArea] = useState("")
   const [yearOfconstruction, setYearOfconstruction]=useState("");
   const [officerealEstate, setOfficerealEstate]=useState("");
-  const [officeClass, setOfficeClass]=useState("");
+  const [officeClass, setOfficeClass]=useState(""); 
 
 
   return (
@@ -65,10 +64,14 @@ function Office() {
             </div>
           </div>
         </div>
-        
       </div>
       <div className='mt-6 h-20' >
-        <AltitudeRegime/>
+      <div>
+        <span className='text-base font-medium text-temp-gray' >ALTITUDE REGIME</span>
+        <div className='mt-3 w-40 h-10 px-4 bg-[#eee]' >
+          <input type="text" className='w-full bg-[#eee] h-full outline-none col-span-1' />
+        </div>
+      </div>
       </div>
 
       <div className='h-20 mt-4' >

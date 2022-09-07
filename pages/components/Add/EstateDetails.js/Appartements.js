@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import AltitudeRegime from '../AltitudeRegime';
 
 function Appartements() {
   const [rooms, setRooms]=useState(0);
@@ -8,11 +7,10 @@ function Appartements() {
   const [usableSurface, setUsableSurface]=useState("");
   const [floor, setFloor]=useState("");
   const [yearOfconstruction, setYearOfconstruction]=useState("");
-
   const [constructionType, setConstructionType]=useState("");
   const [partitioning, setPartitioning]=useState("");
+  const [parkingType, setParkingType] = useState("");
   
-
 
   return (
     <>
@@ -76,10 +74,15 @@ function Appartements() {
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 
       <div className='mt-6 h-20' >
-        <AltitudeRegime/>
+      <div>
+        <span className='text-base font-medium text-temp-gray' >ALTITUDE REGIME</span>
+        <div className='mt-3 w-40 h-10 px-4 bg-[#eee]' >
+          <input type="text" className='w-full bg-[#eee] h-full outline-none col-span-1' />
+        </div>
+      </div>
       </div>
 
       <div className='mt-6 h-20' >
@@ -101,6 +104,18 @@ function Appartements() {
             <a  onClick={()=>setPartitioning("detached")} className={`cursor-pointer h-10 w-36 flex items-center ${ partitioning!="detached"? "bg-temp-gray2" :"bg-cyan-900"} justify-center text-white text-sm hover:bg-cyan-700 `} >Detached</a>
             <a  onClick={()=>setPartitioning("notrecommended")} className={`cursor-pointer h-10 w-36 flex items-center ${ partitioning!="notrecommended"? "bg-temp-gray2" :"bg-cyan-900"} justify-center text-white text-sm hover:bg-cyan-700 `} >Not recommanded</a>
             <a  onClick={()=>setPartitioning("car")} className={`cursor-pointer h-10 w-36 flex items-center ${ partitioning!="car"? "bg-temp-gray2" :"bg-cyan-900"} justify-center text-white text-sm hover:bg-cyan-700 `} >Car</a>
+          </div>
+        </div>
+      </div>
+
+      <div className='mt-6 h-20' >
+        <span className='text-base font-medium text-temp-gray' >PARKING</span>
+        <div className='h-12 grid  grid-cols-1 mt-4'  >
+          <div className='flex flex-row gap-5 col-span-1' >
+            <a  onClick={()=>setParkingType("go")} className={`cursor-pointer h-10 w-36 flex items-center ${ parkingType!="go"? "bg-temp-gray2" :"bg-cyan-900"} justify-center text-white text-sm hover:bg-cyan-700 `} >Go</a>
+            <a  onClick={()=>setParkingType("garage")} className={`cursor-pointer h-10 w-36 flex items-center ${ parkingType!="garage"? "bg-temp-gray2" :"bg-cyan-900"} justify-center text-white text-sm hover:bg-cyan-700 `} >Garage</a>
+            <a  onClick={()=>setParkingType("suppraterrnane")} className={`cursor-pointer h-10 w-36 flex items-center ${ parkingType!="suppraterrnane"? "bg-temp-gray2" :"bg-cyan-900"} justify-center text-white text-sm hover:bg-cyan-700 `} >Supraterrane</a>
+            <a  onClick={()=>setParkingType("underground")} className={`cursor-pointer h-10 w-36 flex items-center ${ parkingType!="underground"? "bg-temp-gray2" :"bg-cyan-900"} justify-center text-white text-sm hover:bg-cyan-700 `} >underground</a>
           </div>
         </div>
       </div>

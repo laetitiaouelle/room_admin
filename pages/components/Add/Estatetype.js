@@ -1,6 +1,5 @@
-
-
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { PanoramaContext } from '../../states/panorama_context';
 import Appartements from './EstateDetails.js/Appartements';
 import Case from './EstateDetails.js/Case';
 import Commercial from './EstateDetails.js/Commercial';
@@ -11,7 +10,16 @@ import Office from './EstateDetails.js/Office';
 
 function Estatetype() {
     const [estateType, setEstateType] = useState("");
-
+    const {datas, setDatas} = useContext(PanoramaContext);
+    useEffect(() => {
+      setDatas({
+        ...datas,
+        estateType:estateType
+      })
+     }, [estateType])
+     useEffect(() => {
+      console.log(datas)
+     }, [datas])
   return (
     <div className='mt-10' >
         <span className='text-base font-medium text-temp-gray' >REAL ESTATE TYPE</span>
