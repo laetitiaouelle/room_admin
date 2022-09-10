@@ -9,6 +9,7 @@ import { ViewPortContext } from './states/viewport_context'
 import { PanoramaContext } from './states/panorama_context'
 import { UserContext } from './states/user_context';
 import { useRouter } from 'next/router'
+import Loader from "./layout/Loader";
 
 
 function Add() {
@@ -17,9 +18,16 @@ function Add() {
 
   const router = useRouter();
   const {user, setUser} = useContext(UserContext);
+  const [isLoading, setIsLoading]=useState(false)
   
   useEffect(() => {
-    user==null?router.push('/auth/login'):null
+    let accessToken = sessionStorage.getItem("accessToken")
+    if(!accessToken){
+      console.log("a",accessToken)
+      router.push('/auth/login')
+    }else{
+      setIsLoading(true)
+    }
   }, [])
 
   useEffect(() => {
@@ -34,18 +42,23 @@ function Add() {
     });
   }, []);
 
+  
+
   return (
-    <PanoramaContext.Provider value={{datas, setDatas}}>
-      <div >
-        <ViewPortContext.Provider value={{viewport, setViewport}}>
-          <MapView />
-          <SearchBar/>
-        </ViewPortContext.Provider>
-          <TransactionType/>
-          <Estatetype/>
-          <Uploads/>
-      </div>
-    </PanoramaContext.Provider>
+    <>
+      {!isLoading&&(<div className='absolute left-0 right-0 top-0 bottom-0 ' > <Loader opacity="100" /></div>)}
+      <PanoramaContext.Provider value={{datas, setDatas}}>
+        <div >
+          <ViewPortContext.Provider value={{viewport, setViewport}}>
+            <MapView />
+            <SearchBar/>
+          </ViewPortContext.Provider>
+            <TransactionType/>
+            <Estatetype/>
+            <Uploads/>
+        </div>
+      </PanoramaContext.Provider>
+    </>
   )
 }
 

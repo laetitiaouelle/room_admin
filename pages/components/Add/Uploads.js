@@ -1,22 +1,40 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PanoramaContext } from '../../states/panorama_context';
+import {BiImageAdd} from 'react-icons/bi'
+import { IconContext } from "react-icons"
+import { storage } from '../../api/firebase';
+
+
 
 function Uploads() {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [createObjectURL, setCreateObjectURL] = useState(null);
+  const [imgsSrc, setImgsSrc] = useState([]);
   const {datas, setDatas} = useContext(PanoramaContext);
   const [fileType, setfileType] = useState(1);
+  
 
-  const uploadToClient = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      const i = event.target.files[0];
-
-      setImage(i);
-      setCreateObjectURL(URL.createObjectURL(i));
+  const onChange = (e) => {
+    for (const file of e.target.files) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setImgsSrc((imgs) => [...imgs, reader.result]);
+      };
+      reader.onerror = () => {
+        console.log(reader.error);
+      };
     }
   };
+
+  const handleUpload=(images)=>{
+    for (image in images){
+      const uploadImages = storage.ref(`images/`).put(image)
+    }
+    
+  }
+
   useEffect(() => {
     if(title!=""&&description!=""&image!=null){
       setDatas({
@@ -58,15 +76,40 @@ function Uploads() {
           </div>
         </div>
         {
-          fileType!=2&&(<div className='mt-3 w-full h-80 p-4 bg-[#eee]' >
-            <div className='w-full h-full flex items-center justify-center ' >
+          fileType!=2&&(<div className='mt-3 w-full h-80 p-4 bg-[#eee] overflow-y-scroll' >
+            {imgsSrc.length==0&&(<div className='w-full h-full flex items-center justify-center ' >
                 <label for="upload-photo">
-                <a onClick={(e)=>uploadToClient(e)} className=' cursor-pointer hover:bg-[#e6e6e6] w-60 bg-[#e6e6e680] h-40 text-temp-gray flex items-center justify-center' >
+                <a onClick={(e)=>onChange(e)} className=' cursor-pointer hover:bg-[#e6e6e6] w-60 bg-[#e6e6e680] h-40 text-temp-gray flex items-center justify-center' >
                     clique to upload
                 </a>
               </label>
-              <input type={'file'} id="upload-photo" />
-            </div>
+              <input multiple={true} onChange={(e)=>onChange(e)} type={'file'} id="upload-photo" />
+            </div>)}
+            {
+              imgsSrc.length!==0&&(
+                <div className='flex flex-row items-center gap-4 flex-wrap ' >
+                  {imgsSrc.map((link) => (
+                  <span className=' h-40 bg-white flex items-center justify-center' >
+                    <img className='h-40 ' src={link} />
+                  </span>
+                  ))}
+                  <div>
+                    <label for="upload-photo">
+                      <a onChange={(e)=>onChange(e)} className=' cursor-pointer text hover:bg-cyan-700 rounded-full w-12 bg-cyan-900 h-12 text-temp-gray flex items-center justify-center' >
+                      <span className='flex justify-center items-center '>
+                        <IconContext.Provider value={{ color: "#fff"}}>
+                            <div>
+                                <BiImageAdd/>
+                            </div>
+                        </IconContext.Provider>
+                    </span>
+                      </a>
+                    </label>
+                    <input  multiple={true} onChange={(e)=>onChange(e)} type={'file'} id="upload-photo" />
+                  </div>
+                </div>
+              )
+            }
           </div>)
         }
         {

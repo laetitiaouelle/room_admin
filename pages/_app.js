@@ -3,14 +3,13 @@ import '../styles/loader.css'
 
 import Layout from './layout/Layout';
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { UserContext } from './states/user_context';
 
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState();
   const router = useRouter()
-  
   
   return (
     <UserContext.Provider value={{user, setUser}}>
