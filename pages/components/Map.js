@@ -26,7 +26,9 @@ function MapView() {
   }, [viewport])
 
   const onSelectCity = ({longitude, latitude}) => {
-    mapRef.current?.flyTo({center: [longitude, latitude], duration: 3000});
+    if(longitude, latitude){
+      mapRef?.current?.flyTo({center: [longitude, latitude], duration: 3000});
+    }
   };
 
   if (!isBrowser) {

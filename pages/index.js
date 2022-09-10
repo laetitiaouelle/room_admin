@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from './states/user_context';
+import Head from 'next/head'
+import Image from 'next/image'
+import Add from './Add'
 
 export default function Home() {
   const router = useRouter();
@@ -11,10 +14,9 @@ export default function Home() {
   }, [])
   
   return (
+    
     <div>
-      <div className='mx-4' >
-          You added nothing yet
-      </div>
+      <Add/>
     </div>
   )
 }
