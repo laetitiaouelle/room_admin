@@ -2,11 +2,11 @@ import { async } from '@firebase/util';
 import React, { useState, useEffect, useContext } from 'react'
 import { PanoramaContext } from '../states/panorama_context';
 import { ViewPortContext } from '../states/viewport_context';
+import { v4 as uuidv4 } from 'uuid';
 
 function SearchBar() {
   const [focus, setFocus] = useState(false);
   const [values, setValues] = useState([]);
-
   const {viewport, setViewport} = useContext(ViewPortContext);
   const {datas, setDatas} = useContext(PanoramaContext);
 
@@ -30,7 +30,10 @@ useEffect(() => {
 const listItems = values.map((item, index) =>
   <a onClick={()=>
     {
-      setDatas({coordinates:[item.geometry.coordinates[0], item.geometry.coordinates[1]]})
+      setDatas({
+        uid: uuidv4(),
+        coordinates:[item.geometry.coordinates[0], item.geometry.coordinates[1]]
+      })
       setFocus(false),
       setViewport(
         {
