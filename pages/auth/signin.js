@@ -11,6 +11,8 @@ import { UserContext } from '../states/user_context';
 import { collection, addDoc } from 'firebase/firestore'
 import Loader from '../layout/Loader'
 import { v4 as uuidv4 } from 'uuid';
+import { motion } from "framer-motion"
+
 
 
 
@@ -22,7 +24,7 @@ function SignIn() {
     const [userPassword, setUserPassword] = useState("");
     const [errors, seterrors] = useState({});
     const {user, setUser} = useContext(UserContext);
-    const [showLoader, setShowLoader] = useState(false);
+    const [showLoader, setShowLoader] = useState(true);
 
     const auth = getAuth()
     const googleProvider = new GoogleAuthProvider();
@@ -48,6 +50,10 @@ function SignIn() {
       let accessToken = sessionStorage.getItem("accessToken")
       if(accessToken){
         router.push('/')
+      }else{
+        setTimeout(() => {
+            setShowLoader(false)
+        }, 1000);
       }
     }, [])
 
@@ -86,10 +92,17 @@ function SignIn() {
   return (
     <div className='h-screen w-full flex flex-col items-center justify-start pt-32 bg-white' >
         {
-            showLoader&&(<div className='absolute left-0 right-0 top-0 bottom-0  bg-transparent ' > <Loader opacity="70" />  </div>)
+            showLoader&&(
+                <motion.div initial={{ opacity: 0 }}  animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+                    <div className='absolute left-0 right-0 top-0 bottom-0 ' > <Loader Loader opacity="70" />  </div>
+                </motion.div>
+            )
         }
-            <div className='py-6' >
-                <h3 className='text-temp-blue font-semibold' >Create Account</h3>
+       { !showLoader&&
+       (
+        <motion.div initial={{ opacity: 0, scale: 0.9 }}  animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}>
+            <div className='py-6 w-full flex justify-center items-center' >
+                    <h3 className='text-temp-blue font-semibold' >Create Account</h3>
             </div>
             <div className='py-6' >
                 
@@ -154,27 +167,26 @@ function SignIn() {
                     <a onClick={()=>signInWithEmailAndPassword(userEmail, userPassword)}  className='bg-black hover:bg-slate-800 cursor-pointer text-white outline-none w-full h-10 font-bold flex justify-center items-center'>Sign In</a>
                 </div>
             </div>
-        <div className='mb-3' >
-            <h5 className='block text-sm font-bold text-black' >Or</h5>
-        </div>
-        <div className='' >
-            <a onClick={()=>signInWithGoogle()} className=' border-temp-red w-80 h-10 cursor-pointer  border flex items-center justify-center mb-3' >
-                <span className='flex flex-row items-center justify-evenly' >
-                    <span className='block w-4 h-4 '>
-                        <IconContext.Provider value={{ color: "#afafaf"}}>
-                        <div>
-                            <FcGoogle/>
-                        </div>
-                        </IconContext.Provider>
+            <div className='mb-3' >
+                <h5 className='block text-sm font-bold text-black' >Or</h5>
+            </div>
+            <div className='' >
+                <a onClick={()=>signInWithGoogle()} className=' border-temp-red w-80 h-10 cursor-pointer  border flex items-center justify-center mb-3' >
+                    <span className='flex flex-row items-center justify-evenly' >
+                        <span className='block w-4 h-4 '>
+                            <IconContext.Provider value={{ color: "#afafaf"}}>
+                            <div>
+                                <FcGoogle/>
+                            </div>
+                            </IconContext.Provider>
+                        </span>
+                        <span className='block text-temp-red font-bold text-sm ml-2' >Sign with google</span>
                     </span>
-                    <span className='block text-temp-red font-bold text-sm ml-2' >Sign with google</span>
-                </span>
-            </a>
-            
-        </div>
-        <div>
-            
-        </div>
+                </a>
+            </div>
+        </motion.div>
+        )}
+        
     </div>
   )
 }

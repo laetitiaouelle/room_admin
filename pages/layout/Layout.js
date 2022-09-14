@@ -1,6 +1,6 @@
 import React from 'react'
 import {HiOutlineMenuAlt3} from 'react-icons/hi'
-import {BiImageAdd} from 'react-icons/bi'
+import {BiImageAdd, BiLogOutCircle} from 'react-icons/bi'
 import {AiOutlineGlobal} from 'react-icons/ai'
 import { IconContext } from "react-icons"
 import { useRouter } from 'next/router'
@@ -63,6 +63,20 @@ const router = useRouter();
                         </span>
                     </div>
                 </a>
+                <a className='cursor-pointer my-3'>
+                     <div className='px-4 py-3 bg-white group hover:bg-red-300  flex flex-row justify-center w-full  items-center  text-temp-red' >
+                        <span className='hover:text-white  group-hover:text-white text-temp-gray2 font-normal text-sm mr-2' >Logout</span>
+                        <span className='flex justify-center items-center '>
+                            <IconContext.Provider value={{ color: "#fff"}}>
+                                <div>
+                                    <BiLogOutCircle/>
+                                </div>
+                            </IconContext.Provider>
+                        </span>
+                    </div>
+                </a>
+
+               
             </div>
         </div>
       </div>

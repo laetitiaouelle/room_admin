@@ -38,6 +38,11 @@ a {
 input, textarea, select{
   color: black ;
 }
+select{
+  color: black ;
+  background-color: white !important;
+}
+
 label {
   cursor: pointer;
   /* Style as you please, it will become the visible UI component. */
@@ -47,4 +52,16 @@ label {
   opacity: 0;
   position: absolute;
   z-index: -1;
+}
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill{
+  -webkit-text-fill-color: black !important;
 }

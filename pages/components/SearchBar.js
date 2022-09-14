@@ -3,12 +3,15 @@ import React, { useState, useEffect, useContext } from 'react'
 import { PanoramaContext } from '../states/panorama_context';
 import { ViewPortContext } from '../states/viewport_context';
 import { v4 as uuidv4 } from 'uuid';
+import { UserContext } from '../states/user_context';
 
 function SearchBar() {
   const [focus, setFocus] = useState(false);
   const [values, setValues] = useState([]);
   const {viewport, setViewport} = useContext(ViewPortContext);
   const {datas, setDatas} = useContext(PanoramaContext);
+  const {user, setUser} = useContext(UserContext);
+
 
  
   const startSearch=async (val1,val2,val3)=>{
@@ -24,14 +27,15 @@ function SearchBar() {
   }
 
 useEffect(() => {
- console.log(datas)
-}, [datas])
+ console.log("user",user)
+}, [])
 
 const listItems = values.map((item, index) =>
   <a onClick={()=>
     {
       setDatas({
         uid: uuidv4(),
+        // email: user.email,
         coordinates:[item.geometry.coordinates[0], item.geometry.coordinates[1]]
       })
       setFocus(false),

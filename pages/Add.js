@@ -1,4 +1,5 @@
 import "mapbox-gl/dist/mapbox-gl.css"; 
+
 import Estatetype from './components/Add/Estatetype'
 import TransactionType from './components/Add/Transactiontype'
 import Uploads from './components/Add/Uploads'
@@ -10,6 +11,8 @@ import { PanoramaContext } from './states/panorama_context'
 import { UserContext } from './states/user_context';
 import { useRouter } from 'next/router'
 import Loader from "./layout/Loader";
+import { motion } from "framer-motion"
+
 
 
 function Add() {
@@ -18,15 +21,18 @@ function Add() {
 
   const router = useRouter();
   const {user, setUser} = useContext(UserContext);
-  const [isLoading, setIsLoading]=useState(false)
+  const [isLoading, setIsLoading]=useState(true)
   
   useEffect(() => {
+    console.log(user)
     let accessToken = sessionStorage.getItem("accessToken")
     if(!accessToken){
-      console.log("a",accessToken)
       router.push('/auth/login')
     }else{
-      setIsLoading(true)
+      console.log(accessToken)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000);
     }
   }, [])
 
@@ -46,18 +52,25 @@ function Add() {
 
   return (
     <>
-      {!isLoading&&(<div className='absolute left-0 right-0 top-0 bottom-0 ' > <Loader opacity="100" /></div>)}
-      <PanoramaContext.Provider value={{datas, setDatas}}>
-        <div >
-          <ViewPortContext.Provider value={{viewport, setViewport}}>
-            <MapView />
-            <SearchBar/>
-          </ViewPortContext.Provider>
-            <TransactionType/>
-            <Estatetype/>
-            <Uploads/>
-        </div>
-      </PanoramaContext.Provider>
+       {isLoading&&(
+        <motion.div initial={{ opacity: 0, scale: 0.5 }}  animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
+          <div className='absolute left-0 right-0 top-0 bottom-0 ' > <Loader opacity="100" /></div>
+        </motion.div>
+      )}
+
+      {!isLoading&&(<motion.div initial={{ opacity: 0, scale: 0.8 }}  animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}>
+        <PanoramaContext.Provider value={{datas, setDatas}}>
+          <div >
+            <ViewPortContext.Provider value={{viewport, setViewport}}>
+              <MapView />
+              <SearchBar/>
+            </ViewPortContext.Provider>
+              <TransactionType/>
+              <Estatetype/>
+              <Uploads/>
+          </div>
+        </PanoramaContext.Provider>
+      </motion.div>)}
     </>
   )
 }
