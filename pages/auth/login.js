@@ -146,7 +146,7 @@ function Login() {
                         </a>
                     </div>
                     <div className='flex flex-row justify-start items-center mt-5' >
-                        <span className='block text-temp-gray text-sm' >Vous n'avez pas compte</span> <span><a className='cursor-pointer text-temp-blue text-sm ml-2 ' onClick={()=>router.push('/auth/signin')} >Créer en un ici</a></span>
+                        <span className='block text-temp-gray text-sm' >Vous n&apos;avez pas compte</span> <span><a className='cursor-pointer text-temp-blue text-sm ml-2 ' onClick={()=>router.push('/auth/signin')} >Créer en un ici</a></span>
                     </div>
                 </div>
             </motion.div>

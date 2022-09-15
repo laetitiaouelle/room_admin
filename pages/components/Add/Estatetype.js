@@ -11,15 +11,15 @@ import Office from './EstateDetails.js/Office';
 function Estatetype() {
     const [estateType, setEstateType] = useState("");
     const {datas, setDatas} = useContext(PanoramaContext);
+    
+    
     useEffect(() => {
       setDatas({
         ...datas,
         estateType:estateType
       })
-     }, [estateType])
-     useEffect(() => {
-      console.log(datas)
-     }, [datas])
+     }, [estateType, datas, setDatas])
+     
   return (
     <div className='mt-10' >
         <span className='text-base font-medium text-temp-gray' >REAL ESTATE TYPE</span>
