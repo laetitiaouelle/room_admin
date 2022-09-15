@@ -82,7 +82,7 @@ const router = useRouter();
       </div>
       <div className='w-full h-screen ' >
         <div className='w-full h-16 bg-white  flex justify-end items-center px-3 ' >
-            <a onClick={()=>router.push('/add')} className='cursor-pointer w-48' >
+            <a onClick={()=>router.push('/Add')} className='cursor-pointer w-48' >
                 <div className='px-4 py-2 bg-temp-red flex flex-row justify-center w-48 border items-center rounded-full' >
                     <span className='text-white font-normal text-xs' >Add 360° image</span>
                     <span className='flex justify-center items-center '>
