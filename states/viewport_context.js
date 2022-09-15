@@ -1,2 +1,2 @@
 import {createContext} from "react";
-export const ViewPortContext = createContext(null)
+export const ViewPortContext = createContext()
