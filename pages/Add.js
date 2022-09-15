@@ -18,12 +18,10 @@ import { motion } from "framer-motion"
 function Add() {
   const [viewport, setViewport] = useState({});
   const [datas, setDatas] = useState({});
-
   const router = useRouter();
   // const {user, setUser} = useContext(UserContext);
   const [isLoading, setIsLoading]=useState(true)
-  useEffect(() => {
-  }, [router])
+  
   
   useEffect(() => {
     let accessToken = sessionStorage.getItem("accessToken")
@@ -35,7 +33,7 @@ function Add() {
         setIsLoading(false)
       }, 1000);
     }
-  }, [])
+  }, [router])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
