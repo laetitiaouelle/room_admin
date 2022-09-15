@@ -50,6 +50,7 @@ function MapView() {
                       latitude={viewport.latitude}>
                         <span className='block w-5 h-5 ' >
                           <Image
+                            alt=''
                             src={require("../src/pin.png")}
                             style={{
                               width: 20,

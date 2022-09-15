@@ -18,9 +18,7 @@ export default function Home() {
 
 
 
-  useEffect(() => {
-   console.log( auth.currentUser)
-    
+  useEffect(() => {    
     let accessToken = sessionStorage.getItem("accessToken")
     if(!accessToken){
       router.push('/auth/login')
@@ -40,9 +38,6 @@ export default function Home() {
     })
     
   }
-  useEffect(() => {
-    console.log(getData())
-  }, [])
   
   
   

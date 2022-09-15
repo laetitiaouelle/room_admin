@@ -17,6 +17,7 @@ import Loader from "../../layout/Loader";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from 'react-toastify';
 import{motion} from 'framer-motion'
+import Image from 'next/image'
 
 
 
@@ -102,7 +103,7 @@ function Uploads() {
         ...datas,
         imagenumer:uploadImg.length
       });
-  }, [uploadImg])
+  }, [uploadImg, datas, setDatas])
   
  
   useEffect(() => {
@@ -112,7 +113,7 @@ function Uploads() {
         image:image
       });
     }
-  }, [image])
+  }, [image, datas, setDatas])
   
   useEffect(() => {
     if (title != "" && (description != "")) {
@@ -122,11 +123,9 @@ function Uploads() {
         description: description,
       });
     }
-  }, [title, description]);
+  }, [title, description, datas, setDatas]);
 
-  useEffect(() => {
-    console.log(datas);
-  }, [datas]);
+  
 
   return (
     <>
@@ -201,7 +200,7 @@ function Uploads() {
               {uploadImg.length==0&&(
                 <motion.div initial={{ opacity: 0}}  animate={{ opacity: 1}} transition={{ duration: 0.3 }} className="w-full h-full flex items-center justify-center " >
                   <div className="w-full h-full flex items-center justify-center ">
-                    <label for="upload-photo">
+                    <label htmlFor="upload-photo">
                       <a className=" cursor-pointer hover:bg-[#e6e6e6] w-60 bg-[#e6e6e680] h-40 text-temp-gray flex items-center justify-center">
                         clique to upload
                       </a>
@@ -213,6 +212,7 @@ function Uploads() {
                         console.log("this should work", uploadImg&&uploadImg);
                       }}
                       type="file"
+                      alt=''
                       id="upload-photo"
                     />
                   </div>
@@ -224,12 +224,12 @@ function Uploads() {
                     {uploadImg.map((link, i) => (
                       <motion.div key={i} initial={{ opacity: 0, scale:0.9}}  animate={{ opacity: 1, scale:1}} transition={{ duration: 0.3 }}>
                         <span  className=' h-40 bg-white flex items-center justify-center' >
-                          <img className='h-40 ' src={link} />
+                          <Image className='h-40 ' src={link} />
                         </span>
                       </motion.div>
                     ))}
                     <div>
-                      <label for="upload-photo">
+                      <label htmlFor="upload-photo">
                         <a  className=' cursor-pointer text hover:bg-cyan-700 rounded-full w-12 bg-cyan-900 h-12 text-temp-gray flex items-center justify-center' >
                         <span className='flex justify-center items-center '>
                           <IconContext.Provider value={{ color: "#fff"}}>
