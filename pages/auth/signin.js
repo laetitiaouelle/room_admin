@@ -7,7 +7,7 @@ import {MdAlternateEmail, MdPassword} from 'react-icons/md'
 import {app, database} from "../api/firebase"
 import {getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup }  from "firebase/auth"
 import {useRouter} from 'next/router'
-import { UserContext } from '../states/user_context';
+import { UserContext } from '../../states/user_context';
 import { collection, addDoc } from 'firebase/firestore'
 import Loader from '../layout/Loader'
 import { v4 as uuidv4 } from 'uuid';

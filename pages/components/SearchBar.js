@@ -1,9 +1,9 @@
 import { async } from '@firebase/util';
 import React, { useState, useEffect, useContext } from 'react'
-import { PanoramaContext } from '../states/panorama_context';
-import { ViewPortContext } from '../states/viewport_context';
+import { PanoramaContext } from '../../states/panorama_context';
+import { ViewPortContext } from '../../states/viewport_context';
 import { v4 as uuidv4 } from 'uuid';
-import { UserContext } from '../states/user_context';
+import { UserContext } from '../../states/user_context';
 
 function SearchBar() {
   const [focus, setFocus] = useState(false);

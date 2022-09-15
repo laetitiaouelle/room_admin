@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import Loader from './layout/Loader'
-import { UserContext } from './states/user_context'
+import { UserContext } from '../states/user_context'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { getAuth} from 'firebase/auth'
 import { database } from './api/firebase'
@@ -27,7 +27,8 @@ export default function Home() {
         setIsLoading(false)
       }, 1000);
     }
-  }, [])
+  }, [router])
+
   const getData = async()=>{
     const docSnap = await getDocs(databaseRef).then((snapshot)=>{
       let docs =[]

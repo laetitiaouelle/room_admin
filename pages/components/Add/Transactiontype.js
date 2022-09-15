@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { IconContext } from "react-icons"
 import { BiCheck } from "react-icons/bi"
-import { PanoramaContext } from '../../states/panorama_context';
+import { PanoramaContext } from '../../../states/panorama_context';
 
 
 function TransactionType() {
@@ -22,11 +22,9 @@ function TransactionType() {
             tva:tva
         })
      }
-    }, [transactionType, price, tva])
+    }, [ datas, setDatas ,transactionType, price, tva])
     
-    useEffect(() => {
-    console.log(datas)
-    }, [datas])
+    
   return (
     <div>
         <div className='h-12  grid  grid-cols-2  my-3' >

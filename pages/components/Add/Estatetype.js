@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { PanoramaContext } from '../../states/panorama_context';
+import { PanoramaContext } from '../../../states/panorama_context';
 import Appartements from './EstateDetails.js/Appartements';
 import Case from './EstateDetails.js/Case';
 import Commercial from './EstateDetails.js/Commercial';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext,useRef, useCallback } from 'react'
 import Map, { Marker, MapRef } from "react-map-gl";
-import { ViewPortContext } from '../states/viewport_context';
+import { ViewPortContext } from '../../states/viewport_context';
 import Image from 'next/image';
 
 function MapView() {

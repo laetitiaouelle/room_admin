@@ -8,7 +8,7 @@ import {
 } from "firebase/storage";
 import React, { useContext, useEffect, useState } from "react";
 import { database, storage } from "../../api/firebase";
-import { PanoramaContext } from "../../states/panorama_context";
+import { PanoramaContext } from "../../../states/panorama_context";
 import { v4 as uuidv4 } from "uuid";
 import { IconContext } from "react-icons";
 import { BiImageAdd } from "react-icons/bi";
@@ -224,7 +224,7 @@ function Uploads() {
                     {uploadImg.map((link, i) => (
                       <motion.div key={i} initial={{ opacity: 0, scale:0.9}}  animate={{ opacity: 1, scale:1}} transition={{ duration: 0.3 }}>
                         <span  className=' h-40 bg-white flex items-center justify-center' >
-                          <Image className='h-40 ' src={link} />
+                          <Image alt='' className='h-40 ' src={link} />
                         </span>
                       </motion.div>
                     ))}

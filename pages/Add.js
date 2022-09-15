@@ -6,8 +6,8 @@ import Uploads from './components/Add/Uploads'
 import MapView from './components/Map'
 import SearchBar from './components/SearchBar'
 import React, { useState, useEffect, useContext } from 'react'
-import { ViewPortContext } from './states/viewport_context'
-import { PanoramaContext } from './states/panorama_context'
+import { ViewPortContext } from '../states/viewport_context'
+import { PanoramaContext } from '../states/panorama_context'
 // import { UserContext } from './states/user_context';
 import { useRouter } from 'next/router'
 import Loader from "./layout/Loader";

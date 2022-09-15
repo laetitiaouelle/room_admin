@@ -3,7 +3,7 @@ import { IconContext } from "react-icons"
 import {FcGoogle} from 'react-icons/fc'
 import {FaFacebook} from 'react-icons/fa'
 import {MdAlternateEmail, MdPassword} from 'react-icons/md'
-import { UserContext } from '../states/user_context'
+import { UserContext } from '../../states/user_context'
 import { useRouter } from 'next/router'
 import Loader from '../layout/Loader'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
