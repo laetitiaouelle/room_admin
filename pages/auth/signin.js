@@ -55,7 +55,7 @@ function SignIn() {
             setShowLoader(false)
         }, 1000);
       }
-    }, [])
+    }, [router])
 
     
     

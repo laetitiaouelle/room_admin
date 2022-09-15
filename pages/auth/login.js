@@ -35,7 +35,7 @@ function Login() {
                 setShowLoader(false)
             }, 1000);
         }
-      }, [])
+      }, [router])
 
    const login=()=>{
 
