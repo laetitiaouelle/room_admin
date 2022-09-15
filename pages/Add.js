@@ -8,7 +8,7 @@ import SearchBar from './components/SearchBar'
 import React, { useState, useEffect, useContext } from 'react'
 import { ViewPortContext } from './states/viewport_context'
 import { PanoramaContext } from './states/panorama_context'
-import { UserContext } from './states/user_context';
+// import { UserContext } from './states/user_context';
 import { useRouter } from 'next/router'
 import Loader from "./layout/Loader";
 import { motion } from "framer-motion"
@@ -20,11 +20,12 @@ function Add() {
   const [datas, setDatas] = useState({});
 
   const router = useRouter();
-  const {user, setUser} = useContext(UserContext);
+  // const {user, setUser} = useContext(UserContext);
   const [isLoading, setIsLoading]=useState(true)
+  useEffect(() => {
+  }, [router, user])
   
   useEffect(() => {
-    console.log(user)
     let accessToken = sessionStorage.getItem("accessToken")
     if(!accessToken){
       router.push('/auth/login')
