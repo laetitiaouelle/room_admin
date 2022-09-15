@@ -103,7 +103,7 @@ function Uploads() {
         ...datas,
         imagenumer:uploadImg.length
       });
-  }, [uploadImg, datas, setDatas])
+  }, [uploadImg])
   
  
   useEffect(() => {
@@ -113,7 +113,7 @@ function Uploads() {
         image:image
       });
     }
-  }, [image, datas, setDatas])
+  }, [image])
   
   useEffect(() => {
     if (title != "" && (description != "")) {
@@ -123,7 +123,7 @@ function Uploads() {
         description: description,
       });
     }
-  }, [title, description, datas, setDatas]);
+  }, [title, description]);
 
   
 

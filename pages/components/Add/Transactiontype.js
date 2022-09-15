@@ -22,7 +22,7 @@ function TransactionType() {
             tva:tva
         })
      }
-    }, [ datas, setDatas ,transactionType, price, tva])
+    }, [transactionType, price, tva])
     
     
   return (

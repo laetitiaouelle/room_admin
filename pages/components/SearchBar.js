@@ -26,9 +26,7 @@ function SearchBar() {
 
   }
 
-useEffect(() => {
- console.log("user",user)
-}, [user])
+
 
 const listItems = values.map((item, index) =>
   <a onClick={()=>

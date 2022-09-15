@@ -27,7 +27,7 @@ export default function Home() {
         setIsLoading(false)
       }, 1000);
     }
-  }, [router])
+  }, [])
 
   const getData = async()=>{
     const docSnap = await getDocs(databaseRef).then((snapshot)=>{

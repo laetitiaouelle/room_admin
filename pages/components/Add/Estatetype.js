@@ -18,7 +18,7 @@ function Estatetype() {
         ...datas,
         estateType:estateType
       })
-     }, [estateType, datas, setDatas])
+     }, [estateType])
      
   return (
     <div className='mt-10' >

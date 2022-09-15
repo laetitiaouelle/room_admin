@@ -33,7 +33,7 @@ function Add() {
         setIsLoading(false)
       }, 1000);
     }
-  }, [router])
+  }, [])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
