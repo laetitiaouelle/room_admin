@@ -23,7 +23,7 @@ function Add() {
   // const {user, setUser} = useContext(UserContext);
   const [isLoading, setIsLoading]=useState(true)
   useEffect(() => {
-  }, [router, user])
+  }, [router])
   
   useEffect(() => {
     let accessToken = sessionStorage.getItem("accessToken")
