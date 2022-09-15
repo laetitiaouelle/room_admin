@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { UserContext } from './states/user_context';
+import { UserContext } from '../states/user_context';
 import Layout from './layout/Layout';
 import { useRouter } from 'next/router'
 

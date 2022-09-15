@@ -4,7 +4,7 @@ import '../styles/loader.css'
 import Layout from './layout/Layout';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { UserContext } from './states/user_context';
+import { UserContext } from '../states/user_context';
 
 
 function MyApp({ Component, pageProps }) {
