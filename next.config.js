@@ -2,15 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  async redirects() {
-    return [
-      {
-        source: '/add',
-        destination: '/Add',
-        permanent: true,
-      },
-    ]
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
   },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: '/Add',
+  //       destination: '/add/',
+  //       permanent: true,
+  //     },
+  //   ]
+  // },
 }
 
 module.exports = nextConfig

@@ -26,7 +26,7 @@ function Uploads() {
   const [uploadImg, setuploadImg] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [createObjectURL, setCreateObjectURL] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState([]);
   const { datas, setDatas } = useContext(PanoramaContext);
   const [fileType, setfileType] = useState(1);
   const [showLoader, setShowLoader] = useState(false);
@@ -34,9 +34,13 @@ function Uploads() {
   const router = useRouter()
 
   const addData = ()=>{
-    setShowLoader(true)
+    // setShowLoader(true)
+    
     addDoc(databaseRef,datas).then(()=>{
-      working()
+      setDatas({})
+         router.push('/')
+        setShowLoader(false)
+       
     }).catch((errors)=>{
         setShowLoader(false)
         console.log("errors: ", errors)
@@ -45,7 +49,9 @@ function Uploads() {
 
   const working = async () => {
     const progress=0;
-    if (uploadImg) {
+    let urls = [];
+    setShowLoader(true)
+    if (uploadImg && uploadImg.length!=0) {
       for (const listImg of uploadImg) {
         const runFunEach = async () => {
           const type = listImg.type;
@@ -65,11 +71,14 @@ function Uploads() {
               (snapshot) => {
                 progress = progress+(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 console.log("Upload is " + progress + "% done");
-                if(progress/100==uploadImg.length){
-                 
-                  setDatas({})
-                  router.push('/')
-                  setShowLoader(false)
+               
+                if(progress/100>=uploadImg.length){
+                 console.log(progress/100==uploadImg.length)
+                 setDatas({
+                  ...datas,
+                  images: createObjectURL
+                });
+                 addData()
                 }
                 switch (snapshot.state) {
                   case "paused":
@@ -84,19 +93,37 @@ function Uploads() {
               () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                   console.log("File available at", downloadURL);
+                  setCreateObjectURL(createObjectURL=>[...createObjectURL, downloadURL])
                 });
               },
              
-              setuploadImg([])
+              setuploadImg([]),
             );
+
+
+
           }
         };
         await runFunEach();
       }
+      console.log("urls", urls)
+     
+    }else{
+      setDatas({})
+      router.push('/')
+      setShowLoader(false)
     }
   };
 
   
+
+  // useEffect(() => {
+  //   console.log(createObjectURL)
+  //     setDatas({
+  //       ...datas,
+  //       images: createObjectURL
+  //     });
+  // }, [createObjectURL])
 
   useEffect(() => {
       setDatas({
@@ -125,6 +152,9 @@ function Uploads() {
     }
   }, [title, description]);
 
+  useEffect(() => {
+    console.log(uploadImg)
+  }, [uploadImg])
   
 
   return (
@@ -142,9 +172,9 @@ function Uploads() {
      />
 
         {
-          showLoader&&(<div className='absolute left-0 right-0 top-0 bottom-0  bg-transparent ' > <Loader opacity="70" />  </div>)
+          showLoader&&(<div className='absolute z-50 left-0 right-0 top-0 bottom-0  bg-transparent ' > <Loader opacity="70" />  </div>)
         }
-      <div className="mt-4">
+      <div className="mt-4 z-40 ">
         <span className="text-base font-medium text-temp-gray">TITLE</span>
         <div className="mt-3 w-full h-10 px-4 bg-[#eee]">
           <input
@@ -207,9 +237,9 @@ function Uploads() {
                     </label>
                     <input multiple={true}
                       onChange={(e) => {
-                        console.log("files",e.target.files)
-                        setuploadImg((prev)=>[...prev??"",e?.target?.files[0]]);
-                        console.log("this should work", uploadImg&&uploadImg);
+                        
+                        setuploadImg(prev=> [...prev , e?.target?.files[0]]);
+                        
                       }}
                       type="file"
                       alt=''
@@ -223,8 +253,8 @@ function Uploads() {
                   <div className='flex flex-row items-center gap-4 flex-wrap ' >
                     {uploadImg.map((link, i) => (
                       <motion.div key={i} initial={{ opacity: 0, scale:0.9}}  animate={{ opacity: 1, scale:1}} transition={{ duration: 0.3 }}>
-                        <span  className=' h-40 bg-white flex items-center justify-center' >
-                          <Image alt='' className='h-40 ' src={link} />
+                        <span  className=' h-40 w-52 relative bg-white flex items-center justify-center' >
+                          <Image alt='' className='h-40 ' src={URL.createObjectURL(link)} layout="fill" objectFit='contain' />
                         </span>
                       </motion.div>
                     ))}
@@ -242,9 +272,7 @@ function Uploads() {
                       </label>
                       <input multiple={true}
                         onChange={(e) => {
-                          console.log("files",e.target.files)
-                          setuploadImg((prev)=>[...prev??"",e?.target?.files[0]]);
-                          console.log("this should work", uploadImg&&uploadImg);
+                          setuploadImg(prev=> [...prev , e?.target?.files[0]]);
                         }}
                         type="file"
                         id="upload-photo"
@@ -283,7 +311,8 @@ function Uploads() {
         <div className="h-12 grid  w-full grid-cols-2  my-3 relative">
           <div className="flex flex-row items-end justify-end  w-full gap-5 col-span-1 absolute right-0 ">
             <a
-            onClick={()=>addData()}
+            onClick={()=>working()}
+            // onClick={()=>console.log(datas)}
               className={`cursor-pointer h-10 w-36 flex bg-green-900 items-center justify-center text-white text-sm hover:bg-cyan-700 `}
             >
               Add

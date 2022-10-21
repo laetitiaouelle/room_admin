@@ -4,6 +4,7 @@ import { PanoramaContext } from '../../states/panorama_context';
 import { ViewPortContext } from '../../states/viewport_context';
 import { v4 as uuidv4 } from 'uuid';
 import { UserContext } from '../../states/user_context';
+import { getAuth } from 'firebase/auth';
 
 function SearchBar() {
   const [focus, setFocus] = useState(false);
@@ -11,6 +12,7 @@ function SearchBar() {
   const {viewport, setViewport} = useContext(ViewPortContext);
   const {datas, setDatas} = useContext(PanoramaContext);
   const {user, setUser} = useContext(UserContext);
+  const auth = getAuth();
 
 
  
@@ -33,7 +35,7 @@ const listItems = values.map((item, index) =>
     {
       setDatas({
         uid: uuidv4(),
-        // email: user.email,
+        email: auth.currentUser.email,
         coordinates:[item.geometry.coordinates[0], item.geometry.coordinates[1]]
       })
       setFocus(false),
